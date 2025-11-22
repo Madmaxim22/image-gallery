@@ -47,7 +47,7 @@ export default class ImageApp {
   }
 }
 
-class ImageValidator {
+export class ImageValidator {
   static validateImage(url) {
     return new Promise((resolve) => {
       const img = new Image();
