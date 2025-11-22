@@ -1,4 +1,4 @@
- import ImageApp, { ImageValidator } from '../ImageApp';
+import ImageApp, { ImageValidator } from '../ImageApp';
 
 // Мок для galleryManager
 class MockGalleryManager {
@@ -24,7 +24,7 @@ describe('ImageValidator', () => {
         src: '',
       };
 
-      global.Image = jest.fn(() => mockImage);
+      window.Image = jest.fn(() => mockImage);
 
       const url = 'https://example.com/image.jpg';
       const validationPromise = ImageValidator.validateImage(url);
@@ -34,7 +34,7 @@ describe('ImageValidator', () => {
 
       const result = await validationPromise;
       expect(result).toBe(true);
-      expect(global.Image).toHaveBeenCalled();
+      expect(window.Image).toHaveBeenCalled();
       expect(mockImage.src).toBe(url);
     });
 
@@ -45,7 +45,7 @@ describe('ImageValidator', () => {
         src: '',
       };
 
-      global.Image = jest.fn(() => mockImage);
+      window.Image = jest.fn(() => mockImage);
 
       const url = 'https://example.com/invalid.jpg';
       const validationPromise = ImageValidator.validateImage(url);
@@ -55,7 +55,7 @@ describe('ImageValidator', () => {
 
       const result = await validationPromise;
       expect(result).toBe(false);
-      expect(global.Image).toHaveBeenCalled();
+      expect(window.Image).toHaveBeenCalled();
       expect(mockImage.src).toBe(url);
     });
   });
@@ -69,8 +69,12 @@ describe('ImageApp', () => {
   beforeEach(() => {
     // Создаем мок-объекты для DOM элементов
     mockElements = {
-      nameInput: { value: '', addEventListener: jest.fn() },
-      urlInput: { value: '', addEventListener: jest.fn() },
+      nameInput: {
+        value: '', addEventListener: jest.fn()
+      },
+      urlInput: {
+        value: '', addEventListener: jest.fn()
+      },
       addButton: { addEventListener: jest.fn() },
       errorMessage: { textContent: '' },
       inputContainer: { addEventListener: jest.fn() },
@@ -172,7 +176,7 @@ describe('ImageApp', () => {
     it('должен показывать ошибку когда валидация изображения не удалась', async () => {
       mockElements.nameInput.value = 'Test Image';
       mockElements.urlInput.value = 'https://example.com/invalid.jpg';
-      
+
       ImageValidator.validateImage.mockResolvedValueOnce(false);
 
       await imageApp.tryAddImage();
