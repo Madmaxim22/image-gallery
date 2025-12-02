@@ -4,6 +4,8 @@
 
 ![CI](https://github.com/Madmaxim22/image-gallery/actions/workflows/deploy.yml/badge.svg)
 
+[![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)](https://madmaxim22.github.io/image-gallery/)
+
 ## Функциональность
 
 - **Добавление изображений**: Введите название и URL изображения для добавления в галерею
