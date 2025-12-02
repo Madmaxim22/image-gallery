@@ -17,11 +17,10 @@ export default class GalleryManager {
     deleteBtn.className = 'delete-btn';
     deleteBtn.innerHTML = '&times;';
     deleteBtn.onclick = () => {
-      this.galleryElement.removeChild(imageBlock);
+      imageBlock.remove();
     };
 
-    imageBlock.appendChild(img);
-    imageBlock.appendChild(deleteBtn);
-    this.galleryElement.appendChild(imageBlock);
+    imageBlock.append(img, deleteBtn);
+    this.galleryElement.append(imageBlock);
   }
 }
